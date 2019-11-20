@@ -21,34 +21,26 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(attributes={
- *     "normalization_context"={"groups"={"car_read"}},
- *     "denormalization_context"={"groups"={"car_write"}}
+ *     "normalization_context"={"groups"={"bicycle_read"}},
+ *     "denormalization_context"={"groups"={"bicycle_write"}}
  * })
  * @ORM\Entity
  */
-class VoDummyCar extends VoDummyVehicle
+class VoDummyBicycle extends VoDummyVehicle
 {
     /**
      * @var int
      *
      * @ORM\Column(type="integer")
-     * @Groups({"car_read", "car_write"})
+     * @Groups({"bicycle_read", "bicycle_write"})
      */
-    private $mileage;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column
-     * @Groups({"car_read", "car_write"})
-     */
-    private $bodyType;
+    private $weight;
 
     /**
      * @var VoDummyInspection[]|Collection
      *
      * @ORM\OneToMany(targetEntity="VoDummyInspection", mappedBy="vehicle", cascade={"persist"})
-     * @Groups({"car_read", "car_write"})
+     * @Groups({"bicycle_read", "bicycle_write"})
      */
     private $inspections;
 
@@ -60,19 +52,14 @@ class VoDummyCar extends VoDummyVehicle
         string $bodyType = 'coupe'
     ) {
         parent::__construct($make, $insuranceCompany, $drivers);
-        $this->mileage = $weight;
+        $this->weight = $weight;
         $this->bodyType = $bodyType;
         $this->inspections = new ArrayCollection();
     }
 
-    public function getMileage()
+    public function getWeight()
     {
-        return $this->mileage;
-    }
-
-    public function getBodyType()
-    {
-        return $this->bodyType;
+        return $this->weight;
     }
 
     public function getInspections()

@@ -57,7 +57,7 @@ Feature: Value object as ApiResource
     """
     {
         "accepted": true,
-        "car": "/vo_dummy_cars/1"
+        "vehicle": "/vo_dummy_cars/1"
     }
     """
     Then the response status code should be 201
@@ -97,7 +97,7 @@ Feature: Value object as ApiResource
         "@id": "/vo_dummy_inspections/1",
         "@type": "VoDummyInspection",
         "accepted": true,
-        "car": "/vo_dummy_cars/1",
+        "vehicle": "/vo_dummy_cars/1",
         "performed": "2018-08-24T00:00:00+00:00"
     }
     """

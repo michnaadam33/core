@@ -125,6 +125,9 @@ abstract class AbstractItemNormalizer extends AbstractObjectNormalizer
             return $this->serializer->normalize($transformed, $format, $context);
         }
 
+        $objectClass = $this->getObjectClass($object);
+        $context['resource_class'] = $objectClass;
+
         $resourceClass = $this->resourceClassResolver->getResourceClass($object, $context['resource_class'] ?? null);
         $context = $this->initContext($resourceClass, $context);
         $iri = $context['iri'] ?? $this->iriConverter->getIriFromItem($object);
@@ -249,6 +252,7 @@ abstract class AbstractItemNormalizer extends AbstractObjectNormalizer
             }
 
             $class = $mappedClass;
+            $context['resource_class'] = $class;
             $reflectionClass = new \ReflectionClass($class);
         }
 
@@ -501,6 +505,7 @@ abstract class AbstractItemNormalizer extends AbstractObjectNormalizer
     protected function getAttributeValue($object, $attribute, $format = null, array $context = [])
     {
         $context['api_attribute'] = $attribute;
+        $context['resource_class'] = $this->getObjectClass($object);
         $propertyMetadata = $this->propertyMetadataFactory->create($context['resource_class'], $attribute, $this->getFactoryOptions($context));
 
         try {

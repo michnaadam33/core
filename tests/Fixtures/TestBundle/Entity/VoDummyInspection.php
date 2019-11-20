@@ -33,32 +33,32 @@ class VoDummyInspection
      * @var bool
      *
      * @ORM\Column(type="boolean")
-     * @Groups({"car_read", "car_write", "inspection_read", "inspection_write"})
+     * @Groups({"car_read", "car_write", "bicycle_read", "bicycle_write", "inspection_read", "inspection_write"})
      */
     private $accepted;
 
     /**
-     * @var VoDummyCar
+     * @var VoDummyVehicle
      *
-     * @ORM\ManyToOne(targetEntity="VoDummyCar", inversedBy="inspections")
+     * @ORM\ManyToOne(targetEntity="VoDummyVehicle", inversedBy="inspections")
      * @Groups({"inspection_read", "inspection_write"})
      */
-    private $car;
+    private $vehicle;
 
     /**
      * @var DateTime
      *
      * @ORM\Column(type="datetime")
-     * @Groups({"car_read", "car_write", "inspection_read", "inspection_write"})
+     * @Groups({"car_read", "car_write", "bicycle_read", "bicycle_write", "inspection_read", "inspection_write"})
      */
     private $performed;
 
     private $attributeWithoutConstructorEquivalent;
 
-    public function __construct(bool $accepted, VoDummyCar $car, DateTime $performed = null, string $parameterWhichIsNotClassAttribute = '')
+    public function __construct(bool $accepted, VoDummyVehicle $vehicle, DateTime $performed = null, string $parameterWhichIsNotClassAttribute = '')
     {
         $this->accepted = $accepted;
-        $this->car = $car;
+        $this->vehicle = $vehicle;
         $this->performed = $performed ?: new DateTime();
         $this->attributeWithoutConstructorEquivalent = $parameterWhichIsNotClassAttribute;
     }
@@ -68,9 +68,9 @@ class VoDummyInspection
         return $this->accepted;
     }
 
-    public function getCar()
+    public function getVehicle()
     {
-        return $this->car;
+        return $this->vehicle;
     }
 
     public function getPerformed()
